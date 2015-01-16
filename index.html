@@ -22,19 +22,15 @@
         $('button').on('click', function() {
           $.ajax('/Users/Garron/documents/hackreactor/2015-02-twittler/data_generator.js', {
             success: function() {
-              /*index = streams.home.length - $('p').length;
-              while(index >= 0) {
-                var tweet = streams.home[index - 1];
+              var currentIndex = $('div').length;
+              var lastIndex = streams.home.length - 1;
+              while(currentIndex < lastIndex) {
+                var tweet = streams.home[currentIndex];
                 var $tweet = $('<div></div>');
-                $tweet.text('@' + tweet.user + ': ' + tweet.message)
+                $tweet.text('@' + tweet.user + ': ' + tweet.message);
                 $tweet.appendTo($body);
-                index -= 1;                
-              }*/
-              index = streams.home.length - 1;
-              var tweet = streams.home[index];
-              var $tweet = $('<div></div>');
-              $tweet.text('@' + tweet.user + ': ' + tweet.message);
-              $tweet.appendTo($body);
+                currentIndex++;
+              }
             }
           });
         });
