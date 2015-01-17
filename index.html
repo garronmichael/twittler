@@ -8,7 +8,6 @@
     <h1>Twittler</h1>
     <p>Created by Garron Sanchez</p>
     <button class='more'>More Tweets</button>
-    <button class='back'>Back</button>  
     <script>
 
       $(document).ready(function(){
@@ -51,9 +50,8 @@
           $tweet.appendTo($body);
           index -= 1;
         }
-        //Show all tweets when the Latest Tweets or Back button is clicked
+        //Show all tweets when the Latest Tweets is clicked
         $('.more').on('click', showAllTweets);
-        $('.back').on('click', showAllTweets);
 
         //Show all tweets from a user when that username is clicked
         $('.username').on('click', function() {
