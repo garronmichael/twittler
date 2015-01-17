@@ -17,25 +17,29 @@
         var $createdBy = $('p');
         var $moreButton = $('.more');
         var $backButton = $('.back');
+        var $script = $('script');
         var index = streams.home.length - 1;
+
+        //Function that removes rendered tweets and then displays all tweets
         var showAllTweets = function() {
           $.ajax('/Users/Garron/documents/hackreactor/2015-02-twittler/data_generator.js', {
             success: function() {
-              var currentIndex = $('a').length;
-              var lastIndex = streams.home.length - 1;
-              while(currentIndex < lastIndex) {
-                var tweet = streams.home[currentIndex];
+              $('div').remove();
+              index = streams.home.length - 1;
+              while(index >= 0){
+                var tweet = streams.home[index];
                 var $tweet = $('<div></div>');
                 $tweet.text(': ' + tweet.message + ' ' + tweet.created_at);
                 var $name = $('<a class=\'username\' href=\'#\'></a>');
                 $name.text('@' + tweet.user);
                 $name.prependTo($tweet);
-                $tweet.appendTo($body);
-                currentIndex++;
+                $tweet.insertBefore($script);
+                index -= 1;
               }
             }
           });
         };
+
         //Show available tweets when the document is ready
         while(index >= 0){
           var tweet = streams.home[index];
@@ -47,20 +51,24 @@
           $tweet.appendTo($body);
           index -= 1;
         }
-        //Show new tweets when the Latest Tweets button is clicked
+        //Show all tweets when the Latest Tweets or Back button is clicked
         $('.more').on('click', showAllTweets);
+        $('.back').on('click', showAllTweets);
+
         //Show all tweets from a user when that username is clicked
         $('.username').on('click', function() {
-          $body.html('');
-          $header.appendTo($body);
-          $backButton.appendTo($body);
-          $('.back').on('click', showAllTweets);
           var username = $(this).text().replace(/@/, '');
+          $('div').remove();
+          console.log(username);
           var tweetDB = streams.users[username];
+          console.log(tweetDB);
           for(i in tweetDB) {
             var $tweet = $('<div></div>');
-            $tweet.text('@' + tweetDB[i]['user'] + ': ' + tweetDB[i]['message'] + ' ' + tweetDB[i]['created_at']);
-            $tweet.appendTo($body);
+            $tweet.text(': ' + tweetDB[i]['message'] + ' ' + tweetDB[i]['created_at']);
+            var $name = $('<a class=\'username\' href=\'#\'></a>');
+            $name.text('@' + tweetDB[i]['user']);
+            $name.prependTo($tweet);
+            $tweet.insertBefore($script);
           }
         });
       });
