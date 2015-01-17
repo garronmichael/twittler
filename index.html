@@ -5,37 +5,65 @@
     <script src="data_generator.js"></script>
   </head>
   <body>
+    <h1>Twittler</h1>
+    <p>Created by Garron Sanchez</p>
+    <button class='more'>More Tweets</button>
+    <button class='back'>Back</button>  
     <script>
 
       $(document).ready(function(){
         var $body = $('body');
-        $body.html('<button>Latest Tweets</button>');
-
+        var $header = $('h1');
+        var $createdBy = $('p');
+        var $moreButton = $('.more');
+        var $backButton = $('.back');
         var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + tweet.created_at);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
-        $('button').on('click', function() {
+        var showAllTweets = function() {
           $.ajax('/Users/Garron/documents/hackreactor/2015-02-twittler/data_generator.js', {
             success: function() {
-              var currentIndex = $('div').length;
+              var currentIndex = $('a').length;
               var lastIndex = streams.home.length - 1;
               while(currentIndex < lastIndex) {
                 var tweet = streams.home[currentIndex];
                 var $tweet = $('<div></div>');
-                $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + tweet.created_at);
+                $tweet.text(': ' + tweet.message + ' ' + tweet.created_at);
+                var $name = $('<a class=\'username\' href=\'#\'></a>');
+                $name.text('@' + tweet.user);
+                $name.prependTo($tweet);
                 $tweet.appendTo($body);
                 currentIndex++;
               }
             }
           });
+        };
+        //Show available tweets when the document is ready
+        while(index >= 0){
+          var tweet = streams.home[index];
+          var $tweet = $('<div></div>');
+          $tweet.text(': ' + tweet.message + ' ' + tweet.created_at);
+          var $name = $('<a class=\'username\' href=\'#\'></a>');
+          $name.text('@' + tweet.user);
+          $name.prependTo($tweet);
+          $tweet.appendTo($body);
+          index -= 1;
+        }
+        //Show new tweets when the Latest Tweets button is clicked
+        $('.more').on('click', showAllTweets);
+        //Show all tweets from a user when that username is clicked
+        $('.username').on('click', function() {
+          $body.html('');
+          $header.appendTo($body);
+          $backButton.appendTo($body);
+          $('.back').on('click', showAllTweets);
+          var username = $(this).text().replace(/@/, '');
+          var tweetDB = streams.users[username];
+          for(i in tweetDB) {
+            var $tweet = $('<div></div>');
+            $tweet.text('@' + tweetDB[i]['user'] + ': ' + tweetDB[i]['message'] + ' ' + tweetDB[i]['created_at']);
+            $tweet.appendTo($body);
+          }
         });
       });
-
     </script>
   </body>
 </html>
