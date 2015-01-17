@@ -20,6 +20,23 @@
         var index = streams.home.length - 1;
 
         //Function that removes rendered tweets and then displays all tweets
+        var userTimeline = function() {
+          var username = $(this).text().replace(/@/, '');
+          var tweetDB = streams.users[username];
+          var i = tweetDB.length - 1
+          $('div').remove();
+          while(i >= 0) {
+            var $tweet = $('<div></div>');
+            $tweet.text(': ' + tweetDB[i]['message'] + ' ' + tweetDB[i]['created_at']);
+            var $name = $('<a class=\'username\' href=\'#\'></a>');
+            $name.text('@' + tweetDB[i]['user']);
+            $name.prependTo($tweet);
+            $tweet.insertBefore($script);
+            i--;
+          }
+          $('.username').on('click', userTimeline);
+        };
+
         var showAllTweets = function() {
           $.ajax('/Users/Garron/documents/hackreactor/2015-02-twittler/data_generator.js', {
             success: function() {
@@ -35,6 +52,7 @@
                 $tweet.insertBefore($script);
                 index -= 1;
               }
+          $('.username').on('click', userTimeline);
             }
           });
         };
@@ -54,21 +72,7 @@
         $('.more').on('click', showAllTweets);
 
         //Show all tweets from a user when that username is clicked
-        $('.username').on('click', function() {
-          var username = $(this).text().replace(/@/, '');
-          $('div').remove();
-          console.log(username);
-          var tweetDB = streams.users[username];
-          console.log(tweetDB);
-          for(i in tweetDB) {
-            var $tweet = $('<div></div>');
-            $tweet.text(': ' + tweetDB[i]['message'] + ' ' + tweetDB[i]['created_at']);
-            var $name = $('<a class=\'username\' href=\'#\'></a>');
-            $name.text('@' + tweetDB[i]['user']);
-            $name.prependTo($tweet);
-            $tweet.insertBefore($script);
-          }
-        });
+        $('.username').on('click', userTimeline);
       });
     </script>
   </body>
