@@ -8,7 +8,10 @@
   <body>
     <h1>Twittler</h1>
     <p>Created by Garron Sanchez</p>
-    <button class='more'>More Tweets</button>
+    <div class="button">
+          <button class='more'>More Tweets</button>
+    </div>
+    <div class="tweets"></div>
     <script>
 
       $(document).ready(function(){
@@ -16,7 +19,7 @@
         var $header = $('h1');
         var $createdBy = $('p');
         var $moreButton = $('.more');
-        var $backButton = $('.back');
+        var $tweets = $('.tweets');
         var $script = $('script');
         var index = streams.home.length - 1;
 
@@ -25,14 +28,14 @@
           var username = $(this).text().replace(/@/, '');
           var tweetDB = streams.users[username];
           var i = tweetDB.length - 1
-          $('div').remove();
+          $('.tweet').remove();
           while(i >= 0) {
-            var $tweet = $('<div></div>');
+            var $tweet = $('<div class=\'tweet\'></div>');
             $tweet.text(': ' + tweetDB[i]['message'] + ' ' + tweetDB[i]['created_at']);
             var $name = $('<a class=\'username\' href=\'#\'></a>');
             $name.text('@' + tweetDB[i]['user']);
             $name.prependTo($tweet);
-            $tweet.insertBefore($script);
+            $tweet.appendTo($tweets);
             i--;
           }
           $('.username').on('click', userTimeline);
@@ -41,16 +44,16 @@
         var showAllTweets = function() {
           $.ajax('/Users/Garron/documents/hackreactor/2015-02-twittler/data_generator.js', {
             success: function() {
-              $('div').remove();
+              $('.tweet').remove();
               index = streams.home.length - 1;
               while(index >= 0){
                 var tweet = streams.home[index];
-                var $tweet = $('<div></div>');
+                var $tweet = $('<div class=\'tweet\'></div>');
                 $tweet.text(': ' + tweet.message + ' ' + tweet.created_at);
                 var $name = $('<a class=\'username\' href=\'#\'></a>');
                 $name.text('@' + tweet.user);
                 $name.prependTo($tweet);
-                $tweet.insertBefore($script);
+                $tweet.appendTo($tweets);
                 index -= 1;
               }
           $('.username').on('click', userTimeline);
@@ -61,12 +64,12 @@
         //Show available tweets when the document is ready
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
+          var $tweet = $('<div class=\'tweet\'></div>');
           $tweet.text(': ' + tweet.message + ' ' + tweet.created_at);
           var $name = $('<a class=\'username\' href=\'#\'></a>');
           $name.text('@' + tweet.user);
           $name.prependTo($tweet);
-          $tweet.appendTo($body);
+          $tweet.appendTo($tweets);
           index -= 1;
         }
         //Show all tweets when the Latest Tweets is clicked
