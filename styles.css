@@ -7,7 +7,6 @@ body {
 h1 {
 	font-weight: 100;
 	text-align: center;
-	border: 1px solid #000;
 	font-family: Lobster, cursive;
 	font-size: 80px;
 	margin: 0;
@@ -17,14 +16,15 @@ p {
 	font-weight: 200;
 	font-family: Lobster, cursive;
 	text-align: center;
-	border: 1px solid #000;
 	padding-left: 200px;
 	font-size: 20px;
+	width: 50%;
+	border-bottom: 1px solid #fff;
+	margin: 0 auto 20px auto;
 }
 
 .button {
 	float: left;
-	border: 1px solid #000;	
 	width: 25%;
 	text-align: center;
 }
@@ -33,7 +33,6 @@ button {
 	background-color: #fff;
 	color: #3399FF;
 	border-radius: 50%;
-	border: 1px solid #000;
 	font-size: 50px;
 	font-family: Lobster, cursive;
 	height: 300px;
@@ -42,7 +41,6 @@ button {
 
 .tweets {
 	font-weight: 200;
-	border: 1px solid #000;
 	float: right;
 	width: 70%;
 }
