@@ -5,20 +5,27 @@ body {
 }
 
 h1 {
-	font-weight: 400;
+	font-weight: 100;
 	text-align: center;
 	border: 1px solid #000;
+	font-family: Lobster, cursive;
+	font-size: 80px;
+	margin: 0;
 }
 
 p {
 	font-weight: 200;
+	font-family: Lobster, cursive;
 	text-align: center;
 	border: 1px solid #000;
+	padding-left: 200px;
+	font-size: 20px;
 }
 
 .button {
 	float: left;
 }
+
 button {
 	padding: 20px 100px 20px 1	00px;
 	background-color: #fff;
@@ -39,4 +46,12 @@ button {
 
 .tweet {
 	margin: 8px 0 8px 100px;
+}
+
+a {
+	color: #333399;
+}
+
+a:hover {
+	color: #3366cc;
 }
