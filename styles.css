@@ -1,0 +1,36 @@
+body {
+	background-color: #3399FF;
+	color: #fff;
+	font-family: Helvetica Neue, Helvetica, sans-serif;
+}
+
+h1 {
+	font-weight: 400;
+	text-align: center;
+	border: 1px solid #000;
+}
+
+p {
+	font-weight: 200;
+	text-align: center;
+	border: 1px solid #000;
+}
+
+button {
+	padding: 20px 100px 20px 1	00px;
+	background-color: #fff;
+	color: #3399FF;
+	border-radius: 5px;
+	margin: 0 auto 0 auto;
+	border: 1px solid #000;
+	margin-left: 100px;
+	font-size: 22px;
+	float: left;
+}
+
+div {
+	font-weight: 200;
+	border: 1px solid #000;
+	margin: 8px 0 8px 100px;
+	float: right;
+}
