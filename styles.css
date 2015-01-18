@@ -24,19 +24,20 @@ p {
 
 .button {
 	float: left;
-	border: 1px solid #000;
+	border: 1px solid #000;	
 	width: 25%;
 	text-align: center;
 }
 
-button {
-	padding: 20px 100px 20px 1	00px;
+button {	
 	background-color: #fff;
 	color: #3399FF;
-	border-radius: 5px;
+	border-radius: 50%;
 	border: 1px solid #000;
 	font-size: 50px;
 	font-family: Lobster, cursive;
+	height: 300px;
+	width: 300px;
 }
 
 .tweets {
